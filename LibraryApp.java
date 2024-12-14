@@ -9,6 +9,7 @@ public class LibraryApp extends JFrame {
     private JList<String> bookList;
     private DefaultListModel<String> listModel;
 
+
     public LibraryApp() {
         books = new ArrayList<>();
         listModel = new DefaultListModel<>();

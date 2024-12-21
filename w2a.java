@@ -4,13 +4,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class LibraryApp extends JFrame {
+public class w2a extends JFrame {
     private ArrayList<Book> books;
     private JList<String> bookList;
     private DefaultListModel<String> listModel;
 
 
-    public LibraryApp() {
+    public w2a() {
         books = new ArrayList<>();
         listModel = new DefaultListModel<>();
         
@@ -50,7 +50,7 @@ public class LibraryApp extends JFrame {
                 try {
                     addBook();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(LibraryApp.this,
+                    JOptionPane.showMessageDialog(w2a.this,
                         "Error adding book: " + ex.getMessage(),
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -64,7 +64,7 @@ public class LibraryApp extends JFrame {
                 try {
                     checkOutBook();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(LibraryApp.this,
+                    JOptionPane.showMessageDialog(w2a.this,
                         "Error checking out book: " + ex.getMessage(),
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -78,7 +78,7 @@ public class LibraryApp extends JFrame {
                 try {
                     checkInBook();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(LibraryApp.this,
+                    JOptionPane.showMessageDialog(w2a.this,
                         "Error checking in book: " + ex.getMessage(),
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -166,7 +166,7 @@ public class LibraryApp extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            LibraryApp app = new LibraryApp();
+            w2a app = new w2a();
             app.setVisible(true);
         });
     }

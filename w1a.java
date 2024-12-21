@@ -3,7 +3,7 @@ import java.util.Scanner;
  * Main class that serves as the entry point for the quiz application.
  * Creates and starts a new quiz instance.
  */
-public class Main {
+public class w1a {
  public static void main(String[] args) {
  Quiz quiz = new Quiz();
  quiz.start();

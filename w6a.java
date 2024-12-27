@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 // Note: Non-public classes are used to allow all code to run in a single file
-// In a real application, each class would typically be in its own file
+// For production, each class would typically be in its own file
 
 // Base interface for all vehicles - defines common properties and behaviors
 // that all vehicle types must implement

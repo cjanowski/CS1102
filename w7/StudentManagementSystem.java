@@ -4,8 +4,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +14,7 @@ import java.util.Map;
  * @author Cory Janowski
  * @version 1.0
  */
+@SuppressWarnings("unused")  // Suppress warnings for unused lambda parameters
 public class StudentManagementSystem extends JFrame {
     /** List of all students in the system */
     private final java.util.List<Student> students = new ArrayList<>();

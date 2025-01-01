@@ -7,66 +7,86 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * StudentManagementSystem is the main GUI application class for managing students and courses.
- * It provides a graphical interface for adding/viewing students, managing courses,
- * handling enrollments, and assigning grades.
+ * StudentManagementSystem is the main GUI application class that provides
+ * a graphical interface for managing students, courses, and grades.
+ * 
+ * Features:
+ * - Student management (add, view, enroll)
+ * - Course management (add, track capacity)
+ * - Grade assignment and tracking
+ * - Real-time data display
  * 
  * @author Cory Janowski
  * @version 1.0
  */
 @SuppressWarnings("unused")  // Suppress warnings for unused lambda parameters
 public class StudentManagementSystem extends JFrame {
-    /** List of all students in the system */
+    /** Stores all students currently in the system */
     private final java.util.List<Student> students = new ArrayList<>();
     
-    /** List of all available courses */
+    /** Stores all available courses in the system */
     private final java.util.List<Course> courses = new ArrayList<>();
     
-    /** Table components for displaying student and course data */
+    /** Tables for displaying student and course information */
     private JTable studentTable;
     private JTable courseTable;
     
-    /** Table models for managing student and course data display */
+    /** 
+     * Table model for student data with columns:
+     * - ID: Student's unique identifier
+     * - Name: Student's full name
+     * - Courses Enrolled: Number of courses student is enrolled in
+     */
     private final DefaultTableModel studentTableModel = new DefaultTableModel(
         new String[]{"ID", "Name", "Courses Enrolled"}, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return false;
+            return false;  // Make table read-only
         }
         @Override
         public Class<?> getColumnClass(int columnIndex) {
-            return String.class;
+            return String.class;  // All columns contain String data
         }
     };
     
+    /** 
+     * Table model for course data with columns:
+     * - ID: Course's unique identifier
+     * - Name: Course name
+     * - Enrolled/Max: Current enrollment count and maximum capacity
+     */
     private final DefaultTableModel courseTableModel = new DefaultTableModel(
         new String[]{"ID", "Name", "Enrolled/Max"}, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return false;
+            return false;  // Make table read-only
         }
         @Override
         public Class<?> getColumnClass(int columnIndex) {
-            return String.class;
+            return String.class;  // All columns contain String data
         }
     };
     
-    /** Dropdown components for student and course selection */
+    /** Dropdown menus for selecting students and courses */
     private JComboBox<Student> studentComboBox;
     private JComboBox<Course> courseComboBox;
     
-    /** Main panel containing all GUI components */
+    /** Main container panel with BorderLayout */
     private JPanel mainPanel;
 
     /**
-     * Constructs the main application window and initializes all components.
-     * Sets up the menu bar, creates the layout, and adds sample data.
+     * Initializes the main application window and all its components.
+     * Sets up:
+     * - Window properties (title, size, location)
+     * - Menu bar with File, Student, and Course menus
+     * - Main panel with top and center sections
+     * - Sample data for testing
      */
     public StudentManagementSystem() {
         setTitle("Student Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 700);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);  // Center on screen
 
         createMenuBar();
         mainPanel = new JPanel(new BorderLayout(10, 10));
@@ -80,6 +100,7 @@ public class StudentManagementSystem extends JFrame {
 
     /**
      * Adds sample courses to the system for testing purposes.
+     * Creates three default courses with different capacities.
      */
     private void addSampleData() {
         courses.add(new Course("CS1102", "Programming I", 30));

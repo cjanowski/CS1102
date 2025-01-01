@@ -5,6 +5,8 @@ import java.util.*;
 /**
  * Represents a course in the Student Management System.
  * Contains information about the course and manages enrolled students.
+ * @author Cory Janowski
+ * @version 1.0
  */
 public class Course {
     private String id;              // Unique identifier for the course

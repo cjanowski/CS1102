@@ -5,6 +5,8 @@ import javax.swing.SwingUtilities;
 /**
  * Main entry point for the Student Management System application.
  * This class initializes and launches the GUI application.
+ * @author Cory Janowski
+ * @version 1.0
  */
 public class Main {
     /**

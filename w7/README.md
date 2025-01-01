@@ -83,3 +83,5 @@ A Java Swing-based desktop application for managing students, courses, enrollmen
    - Grades
 
 ## Project Structure
+
+### File Organization

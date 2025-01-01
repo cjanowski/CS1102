@@ -3,7 +3,10 @@ package w7;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * StudentManagementSystem is the main GUI application class for managing students and courses.
@@ -15,10 +18,10 @@ import java.util.*;
  */
 public class StudentManagementSystem extends JFrame {
     /** List of all students in the system */
-    private List<Student> students = new ArrayList<>();
+    private final java.util.List<Student> students = new ArrayList<>();
     
     /** List of all available courses */
-    private List<Course> courses = new ArrayList<>();
+    private final java.util.List<Course> courses = new ArrayList<>();
     
     /** Table components for displaying student and course data */
     private JTable studentTable;
@@ -80,9 +83,9 @@ public class StudentManagementSystem extends JFrame {
      * Adds sample courses to the system for testing purposes.
      */
     private void addSampleData() {
-        courses.add(new Course("CS101", "Introduction to Programming", 30));
-        courses.add(new Course("CS102", "Data Structures", 25));
-        courses.add(new Course("CS103", "Algorithms", 20));
+        courses.add(new Course("CS1102", "Programming I", 30));
+        courses.add(new Course("CS1103", "Programming II", 25));
+        courses.add(new Course("CS1104", "Database I", 20));
         updateCourseComboBox();
     }
 

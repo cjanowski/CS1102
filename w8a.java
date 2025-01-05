@@ -1,3 +1,33 @@
+/**
+ * Employee Management System
+ * 
+ * This program processes employee data from a CSV file or uses sample data if no file is provided.
+ * 
+ * USAGE:
+ * 1. Compile: javac w8a.java
+ * 2. Run with file: java w8a employees.csv
+ * 3. Run without file: java w8a (uses sample data)
+ * 
+ * FILE FORMAT:
+ * - CSV file with optional header row
+ * - Each line should contain: name,age,department,salary
+ * - Example: John Doe,30,Engineering,75000
+ * - Fields may be quoted: "John Doe",30,"Engineering",75000
+ * 
+ * DATA REQUIREMENTS:
+ * - name: non-empty string
+ * - age: positive integer
+ * - department: non-empty string
+ * - salary: positive number
+ * 
+ * FEATURES:
+ * - Robust CSV parsing with error handling
+ * - Supports quoted values
+ * - Skips invalid records with error messages
+ * - Calculates various salary statistics
+ * - Uses Java streams for data processing
+ */
+
 /*
  * Example csv format should be
  * John Doe,30,Engineering,75000
@@ -17,6 +47,10 @@
  import java.util.function.Predicate;
  import java.util.stream.Collectors;
  
+ /**
+  * Represents an employee with basic information.
+  * Immutable class storing employee details.
+  */
  class Employee {
      private String name;
      private int age;
@@ -43,6 +77,10 @@
      }
  }
  
+ /**
+  * Handles employee data processing and analysis.
+  * Provides functionality for loading, filtering, and analyzing employee data.
+  */
  class EmployeeProcessor {
      private List<Employee> employees;
  
@@ -50,7 +88,19 @@
          this.employees = new ArrayList<>();
      }
  
-     // Load employees from file (CSV format: name,age,department,salary)
+     /**
+      * Loads employee data from a CSV file.
+      * 
+      * @param filename Path to the CSV file
+      * @throws IOException If file reading errors occur
+      * 
+      * Features:
+      * - Skips empty lines
+      * - Detects and skips header row
+      * - Validates data format and values
+      * - Provides detailed error messages for invalid records
+      * - Handles quoted values in CSV
+      */
      public void loadFromFile(String filename) throws IOException {
          try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
              String line;
@@ -124,20 +174,37 @@
          }
      }
  
-     // Rest of the methods remain the same
+     /**
+      * Adds a single employee to the processor.
+      * @param employee Employee object to add
+      */
      public void addEmployee(Employee employee) {
          employees.add(employee);
      }
  
+     /**
+      * Function to combine employee name and department.
+      * Used in stream operations for employee info display.
+      */
      public Function<Employee, String> concatenateNameAndDepartment = 
          employee -> employee.getName() + " - " + employee.getDepartment();
  
+     /**
+      * Returns a list of employee information strings.
+      * Format: "name - department"
+      * @return List of formatted employee information
+      */
      public List<String> getEmployeeInfo() {
          return employees.stream()
                         .map(concatenateNameAndDepartment)
                         .collect(Collectors.toList());
      }
  
+     /**
+      * Calculates average salary for employees above specified age.
+      * @param ageThreshold Minimum age to include in calculation
+      * @return Average salary or 0.0 if no matching employees
+      */
      public double getAverageSalaryAboveAge(int ageThreshold) {
          return employees.stream()
                         .filter(emp -> emp.getAge() > ageThreshold)
@@ -146,6 +213,11 @@
                         .orElse(0.0);
      }
  
+     /**
+      * Calculates average salary based on custom filter.
+      * @param filter Predicate to filter employees
+      * @return Average salary of filtered employees or 0.0 if none match
+      */
      public double getAverageSalaryWithFilter(Predicate<Employee> filter) {
          return employees.stream()
                         .filter(filter)
@@ -155,6 +227,19 @@
      }
  }
  
+ /**
+  * Main class demonstrating employee data processing functionality.
+  * 
+  * Example Usage:
+  * 1. Process file: java w8a path/to/employees.csv
+  * 2. Use sample data: java w8a
+  * 
+  * Output includes:
+  * - List of all employees (name - department)
+  * - Average salary for employees over 30
+  * - Average salary for Engineering department
+  * - Average salary for engineers over 30
+  */
  public class w8a {
      public static void main(String[] args) {
          EmployeeProcessor processor = new EmployeeProcessor();

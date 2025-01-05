@@ -5,8 +5,21 @@
  * 
  * USAGE:
  * 1. Compile: javac w8a.java
- * 2. Run with file: java w8a employees.csv
- * 3. Run without file: java w8a (uses sample data)
+ * 2. Run with file and age filter: java w8a employees.csv 35
+ * 3. Run with file only: java w8a employees.csv (uses default age filter of 30)
+ * 4. Run without arguments: java w8a (uses sample data and default age filter of 30)
+ * 
+ * ARGUMENTS:
+ * 1. filename (optional): CSV file containing employee data
+ * 2. age_filter (optional): Minimum age for salary calculations (default: 30)
+ *    - Must be a positive integer
+ *    - Used for filtering employees in salary calculations
+ *    - Invalid values will default to 30
+ * 
+ * EXAMPLES:
+ * java w8a                     # Uses sample data, age filter 30
+ * java w8a employees.csv       # Uses file data, age filter 30
+ * java w8a employees.csv 35    # Uses file data, age filter 35
  * 
  * FILE FORMAT:
  * - CSV file with optional header row
@@ -243,7 +256,21 @@
  public class w8a {
      public static void main(String[] args) {
          EmployeeProcessor processor = new EmployeeProcessor();
- 
+         int ageFilter = 30; // Default age filter
+
+         // Process age filter argument if provided
+         if (args.length > 1) {
+             try {
+                 ageFilter = Integer.parseInt(args[1]);
+                 if (ageFilter < 0) {
+                     System.err.println("Age filter must be non-negative. Using default age filter: 30");
+                     ageFilter = 30;
+                 }
+             } catch (NumberFormatException e) {
+                 System.err.println("Invalid age filter format. Using default age filter: 30");
+             }
+         }
+
          if (args.length > 0) {
              try {
                  System.out.println("Attempting to load employees from file: " + args[0]);
@@ -273,8 +300,8 @@
          List<String> employeeInfo = processor.getEmployeeInfo();
          employeeInfo.forEach(System.out::println);
  
-         System.out.println("\nAverage salary for employees above 30:");
-         System.out.printf("$%.2f%n", processor.getAverageSalaryAboveAge(30));
+         System.out.printf("%nAverage salary for employees above %d:%n", ageFilter);
+         System.out.printf("$%.2f%n", processor.getAverageSalaryAboveAge(ageFilter));
  
          System.out.println("\nAverage salary for Engineering department:");
          double avgEngineeringSalary = processor.getAverageSalaryWithFilter(
